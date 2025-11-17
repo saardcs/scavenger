@@ -87,6 +87,6 @@ if st.button("Submit"):
             st.success("Correct! 🎉")
             st.write("Your next clue:")
             st.info(current["clue"])
-            st.write(f"Next QR code or link: **{next_url}**")
+            # st.write(f"Next QR code or link: **{next_url}**")
     else:
         st.error("❌ Incorrect answer. Try again!")
