@@ -12,8 +12,7 @@ token_map = {token: idx for idx, token in enumerate(tokens)}
 # --- Get token from URL ---
 token = st.query_params.get("token", [""])[0]
 
-# Default to first step if token invalid
-step_index = token_map.get(token, 0)
+step_index = token_map.get(token)
 current = steps[step_index]
 
 st.title("🔐 Scavenger Hunt")
