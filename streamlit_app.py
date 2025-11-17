@@ -25,7 +25,7 @@ user_answer = st.text_input("Your answer:")
 if st.button("Submit"):
     if user_answer.strip().lower() == current["answer"].lower():
         st.success("Correct! 🎉")
-            st.write("Your next clue:")
-            st.info(current.get("clue", ""))    
+        st.write("Your next clue:")
+        st.info(current.get("clue", ""))    
     else:
         st.error("❌ Incorrect answer. Try again!")
