@@ -10,7 +10,7 @@ tokens = st.secrets["scavenger_hunt"]["tokens"]
 token_map = {token: idx for idx, token in enumerate(tokens)}
 
 # --- Get token from URL ---
-query_params = st.experimental_get_query_params()
+query_params = st.query_params()
 token = query_params.get("token", [""])[0]
 
 # Default to first step if token invalid
@@ -24,11 +24,8 @@ user_answer = st.text_input("Your answer:")
 
 if st.button("Submit"):
     if user_answer.strip().lower() == current["answer"].lower():
-        if step_index == len(steps) - 1:
-            st.success(current.get("end_message", "🎉 Congratulations!"))
-        else:
-            st.success("Correct! 🎉")
+        st.success("Correct! 🎉")
             st.write("Your next clue:")
-            st.info(current.get("clue", ""))
+            st.info(current.get("clue", ""))    
     else:
         st.error("❌ Incorrect answer. Try again!")
