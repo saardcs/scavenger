@@ -10,8 +10,7 @@ tokens = st.secrets["scavenger_hunt"]["tokens"]
 token_map = {token: idx for idx, token in enumerate(tokens)}
 
 # --- Get token from URL ---
-query_params = st.query_params()
-token = query_params.get("token", [""])[0]
+token = st.query_params.get("token", [""])[0]
 
 # Default to first step if token invalid
 step_index = token_map.get(token, 0)
