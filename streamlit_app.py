@@ -11,6 +11,8 @@ token_map = {token: idx for idx, token in enumerate(tokens)}
 
 # --- Get token from URL ---
 token = st.query_params.get("token", [""])[0]
+print(token)
+print(token_map)
 
 step_index = token_map.get(token)
 current = steps[step_index]
