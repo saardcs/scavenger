@@ -11,21 +11,19 @@ token_map = {token: idx for idx, token in enumerate(tokens)}
 
 # --- Get token from URL ---
 token = st.query_params.get("token", [""])# [0]
-print(token)
-print(token_map)
 
 step_index = token_map.get(token)
 current = steps[step_index]
 
 st.title("🔐 Scavenger Hunt")
 
-st.subheader(current["question"])
-user_answer = st.text_input("Your answer:")
+st.subheader(current["clue"])
+# user_answer = st.text_input("Your answer:")
 
-if st.button("Submit"):
-    if user_answer.strip().lower() == current["answer"].lower():
-        st.success("Correct! 🎉")
-        st.write("Your next clue:")
-        st.info(current.get("clue", ""))    
-    else:
-        st.error("❌ Incorrect answer. Try again!")
+# if st.button("Submit"):
+#     if user_answer.strip().lower() == current["answer"].lower():
+#         st.success("Correct! 🎉")
+#         st.write("Your next clue:")
+#         st.info(current.get("clue", ""))    
+#     else:
+#         st.error("❌ Incorrect answer. Try again!")
