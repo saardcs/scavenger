@@ -1,29 +1,37 @@
 import streamlit as st
 
-st.set_page_config(page_title="Secure Scavenger Hunt", layout="centered")
+st.set_page_config(
+    page_title="Secure Scavenger Hunt",
+    layout="centered"
+)
 
-# --- Load steps and tokens from secrets ---
+# --- Load data from secrets ---
 steps = st.secrets["scavenger_hunt"]["steps"]
 tokens = st.secrets["scavenger_hunt"]["tokens"]
+images = st.secrets["scavenger_hunt"]["images"]
 
-# Map tokens to step index
+# --- Map token -> page index ---
 token_map = {token: idx for idx, token in enumerate(tokens)}
 
-# --- Get token from URL ---
+# --- Read token from URL ---
 token = st.query_params.get("token", [""])[0]
 
+# --- Find matching page ---
 step_index = token_map.get(token)
-current = steps[step_index]
 
 st.title("🔐 Scavenger Hunt")
 
-st.subheader(current["clue"])
-# user_answer = st.text_input("Your answer:")
+# --- Invalid token ---
+if step_index is None:
+    st.error("Invalid or missing token.")
+    st.stop()
 
-# if st.button("Submit"):
-#     if user_answer.strip().lower() == current["answer"].lower():
-#         st.success("Correct! 🎉")
-#         st.write("Your next clue:")
-#         st.info(current.get("clue", ""))    
-#     else:
-#         st.error("❌ Incorrect answer. Try again!")
+# --- Get current step ---
+current = steps[step_index]
+
+# --- Show image ---
+if step_index < len(images):
+    st.image(images[step_index], use_container_width=True)
+
+# --- Show question/text ---
+st.subheader(current["question"])
