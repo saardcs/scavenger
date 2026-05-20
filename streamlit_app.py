@@ -10,7 +10,7 @@ tokens = st.secrets["scavenger_hunt"]["tokens"]
 token_map = {token: idx for idx, token in enumerate(tokens)}
 
 # --- Get token from URL ---
-token = st.query_params.get("token", [""])# [0]
+token = st.query_params.get("token", [""])[0]
 
 step_index = token_map.get(token)
 current = steps[step_index]
